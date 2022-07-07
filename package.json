@@ -1,6 +1,7 @@
 {
   "name": "github-projects-component-library",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "repository": "https://github.com/github-projects-board/github-projects-board.git",
   "author": "michaelballos <ballos.michael@gmai.com>",
@@ -13,6 +14,7 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
     "source-map-loader": "^4.0.0",
     "ts-loader": "^9.3.1",
     "typescript": "^4.7.4",

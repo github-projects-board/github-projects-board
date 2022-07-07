@@ -1,0 +1,17 @@
+{
+  "name": "github-projects-component-library",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/github-projects-board/github-projects-board.git",
+  "author": "michaelballos <ballos.michael@gmai.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.3"
+  }
+}

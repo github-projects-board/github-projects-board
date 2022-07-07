@@ -1,25 +1,101 @@
 {
-  "name": "github-projects-component-library",
-  "version": "1.0.0",
-  "type": "module",
-  "main": "index.js",
-  "repository": "https://github.com/github-projects-board/github-projects-board.git",
-  "author": "michaelballos <ballos.michael@gmai.com>",
-  "license": "MIT",
+  "name": "github-projects-board",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.13",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.4.2",
+    "web-vitals": "^2.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "jest",
+    "eject": "react-scripts eject",
+    "lint": "./node_modules/.bin/eslint",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "devDependencies": {
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
-    "css-loader": "^6.7.1",
-    "html-webpack-plugin": "^5.5.0",
-    "source-map-loader": "^4.0.0",
-    "ts-loader": "^9.3.1",
-    "typescript": "^4.7.4",
-    "webpack": "^5.73.0",
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.9.3"
+    "@babel/core": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@storybook/addon-actions": "^6.5.9",
+    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-interactions": "^6.5.9",
+    "@storybook/addon-links": "^6.5.9",
+    "@storybook/builder-webpack5": "^6.5.9",
+    "@storybook/manager-webpack5": "^6.5.9",
+    "@storybook/node-logger": "^6.5.9",
+    "@storybook/preset-create-react-app": "^4.1.2",
+    "@storybook/react": "^6.5.9",
+    "@storybook/testing-library": "^0.0.13",
+    "babel-jest": "^28.1.2",
+    "babel-plugin-named-exports-order": "^0.0.2",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "jest": "^28.1.2",
+    "msw": "^0.43.1",
+    "msw-storybook-addon": "^1.6.3",
+    "prop-types": "^15.8.1",
+    "webpack": "^5.73.0"
+  },
+  "msw": {
+    "workerDirectory": "public"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "bower_components",
+      "shared"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
+      "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
+    }
   }
 }

@@ -5,17 +5,16 @@ import React, {
 
 export type BearerToken = string | undefined;
 
-const authorize = async (bearerToken: BearerToken) => {
+export const authorize = async (bearerToken: BearerToken) => {
   try {
-    const response = await fetch('https://api.github.com/graphql', {
+    return await fetch('https://api.github.com/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${bearerToken}`,
       },
       body: JSON.stringify({ query: 'query { viewer { login } }' }),
-    });
-    return await response.json();
+    }).then((res) => res.json());
   } catch (error) {
     return error;
   }

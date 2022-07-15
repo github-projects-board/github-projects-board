@@ -32,6 +32,8 @@ module.exports = {
       '',
       'js',
       'jsx',
+      'ts',
+      'tsx'
     ],
     modules: [
       'node_modules',

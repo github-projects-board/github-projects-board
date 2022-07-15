@@ -14,7 +14,7 @@ const authorize = async () => {
 export default function App() {
   return (
     <button onClick={authorize} type="button">
-      Status
+      Authorize
     </button>
   );
 }

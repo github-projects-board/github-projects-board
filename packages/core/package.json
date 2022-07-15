@@ -2,11 +2,20 @@
   "name": "github-projects-board",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "jest",
+    "eject": "react-scripts eject",
+    "lint": "./node_modules/.bin/eslint",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
-    "@types/jest": "^27.0.1",
+    "@types/jest": "28.1.2",
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
@@ -16,15 +25,6 @@
     "styled-components": "^5.3.5",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "jest",
-    "eject": "react-scripts eject",
-    "lint": "./node_modules/.bin/eslint",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
@@ -57,6 +57,7 @@
   "devDependencies": {
     "@babel/core": "^7.18.6",
     "@babel/preset-env": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
     "@storybook/addon-actions": "^6.5.9",
     "@storybook/addon-essentials": "^6.5.9",
     "@storybook/addon-interactions": "^6.5.9",
@@ -83,6 +84,7 @@
     "msw": "^0.43.1",
     "msw-storybook-addon": "^1.6.3",
     "prop-types": "^15.8.1",
+    "ts-jest": "^28.0.6",
     "webpack": "^5.73.0"
   },
   "msw": {
@@ -91,7 +93,9 @@
   "jest": {
     "moduleFileExtensions": [
       "js",
-      "jsx"
+      "jsx",
+      "ts",
+      "tsx"
     ],
     "moduleDirectories": [
       "node_modules",

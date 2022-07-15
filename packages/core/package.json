@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "ts-jest",
+    "test": "jest",
     "eject": "react-scripts eject",
     "lint": "./node_modules/.bin/eslint",
     "storybook": "start-storybook -p 6006 -s public",

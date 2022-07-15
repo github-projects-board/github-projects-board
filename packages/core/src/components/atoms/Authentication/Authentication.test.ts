@@ -1,6 +1,6 @@
 import { authorize } from './Authentication';
 
-const MOCK_BEARER_TOKEN = 'Bearer 12345';
+const MOCK_BEARER_TOKEN = '12345';
 const MOCK_RESPONSE = {
   data: {
     views: {
@@ -20,5 +20,14 @@ describe('Authentication', () => {
   it('should return a user after authentication', async () => {
     const response = await authorize(MOCK_BEARER_TOKEN);
     expect(response).toEqual(MOCK_RESPONSE);
+  });
+  it('should throw an error if the token is not provided', async () => {
+    try {
+      // @ts-ignore
+      const response = await authorize();
+      expect(response).toBeUndefined();
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
   });
 });

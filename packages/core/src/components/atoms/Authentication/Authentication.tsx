@@ -6,15 +6,19 @@ import React, {
 export type BearerToken = string | undefined;
 
 const authorize = async (bearerToken: BearerToken) => {
-  const response = await fetch('https://api.github.com/graphql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${bearerToken}`,
-    },
-    body: JSON.stringify({ query: 'query { viewer { login } }' }),
-  });
-  return response.json();
+  try {
+    const response = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${bearerToken}`,
+      },
+      body: JSON.stringify({ query: 'query { viewer { login } }' }),
+    });
+    return await response.json();
+  } catch (error) {
+    return error;
+  }
 };
 
 export interface IAuthentication {
@@ -28,12 +32,8 @@ function Authentication({ bearerToken }: IAuthentication) {
   ] = useState(false);
   useEffect(() => {
     if (!isAuthorized && bearerToken) {
-      try {
-        authorize(bearerToken);
-        setAuthorized(true);
-      } catch (error) {
-        setAuthorized(false);
-      }
+      authorize(bearerToken);
+      setAuthorized(true);
     }
   }, [
     isAuthorized,

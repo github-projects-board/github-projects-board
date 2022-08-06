@@ -21,11 +21,11 @@ export const authorize = async (bearerToken: BearerToken) => {
   }
 };
 
-export interface IAuthentication {
+export interface AuthenticationProps {
   bearerToken: BearerToken;
 }
 
-function Authentication({ bearerToken }: IAuthentication) {
+function Authentication({ bearerToken }: AuthenticationProps) {
   const [
     isAuthorized,
     setAuthorized,

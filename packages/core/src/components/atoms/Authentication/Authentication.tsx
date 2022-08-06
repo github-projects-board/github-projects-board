@@ -15,6 +15,7 @@ export const authorize = async (bearerToken: BearerToken) => {
       },
       body: JSON.stringify({ query: 'query { viewer { login } }' }),
     });
+    console.log(await response.json());
     return await response.json();
   } catch (error) {
     return error;
@@ -39,6 +40,7 @@ function Authentication({ bearerToken }: AuthenticationProps) {
     isAuthorized,
     bearerToken,
   ]);
+
   return (
     <div>
       {

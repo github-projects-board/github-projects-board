@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Content } from '../ProjectBoard/ProjectBoard';
+import Label from '../../atoms/IssueLabel/IssueLabel';
 
 interface IssueCardProps {
   content: Content;
@@ -10,6 +11,7 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   background-color: rgb(22, 27, 34);
+  padding: 12px;
 `;
 
 const Repository = styled.div`
@@ -23,10 +25,17 @@ const Title = styled.div`
   color: rgb(201, 209, 217);
 `;
 
+const Labels = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+`;
+
 export default function IssueCard({ content }: IssueCardProps) {
   const {
     title,
     repository,
+    labels,
   } = content;
 
   return (
@@ -37,6 +46,14 @@ export default function IssueCard({ content }: IssueCardProps) {
       <Title>
         {title}
       </Title>
+      <Labels>
+        {labels && labels.nodes.map(label => (
+          <Label 
+            key={label.name}
+            labelProperties={label}
+          />))
+        }
+      </Labels>
     </Card>
   );
 }

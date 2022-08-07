@@ -163,7 +163,7 @@ export default function ProjectBoard({ bearerToken }: ProjectBoardProps) {
                 } = issue;
                 return fieldValues.nodes[0].name === name && (
                   <IssueCard
-                    key={content.id}
+                    key={content.id + content.title}
                     content={content}
                   />
                 );

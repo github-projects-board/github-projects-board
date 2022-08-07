@@ -34,6 +34,9 @@ const Title = styled.div`
 `;
 
 const ScrollArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
   overflow-y: scroll;
   height: 100%;
 `;

@@ -1,8 +1,8 @@
 import React from 'react';
-import GithubProjectBoard from './components/molecules/GithubProject/GithubProject';
+import ProjectBoard from './components/molecules/ProjectBoard/ProjectBoard';
 
 export default function App() {
   return (
-    <GithubProjectBoard bearerToken={process.env.REACT_APP_GITHUB_BEARER_TOKEN} />
+    <ProjectBoard bearerToken={process.env.REACT_APP_GITHUB_BEARER_TOKEN} />
   );
 }

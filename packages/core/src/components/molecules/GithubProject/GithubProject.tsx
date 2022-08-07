@@ -13,66 +13,46 @@ export interface GithubProjectBoardProps {
 }
 
 // PVT_kwHOBXyyXM4ABZY9
-const GET_PROJECT = gql`
-   query GetProject($numberOfIssues: Int!, $numberOfFieldValues: Int!, $numberOfAssignees: Int!, $numberOfLabels: Int!) {
+const GET_PROJECT_COLUMNS = gql`
+  query {
     node(id: "PVT_kwHOBXyyXM4ABZY9") {
-        ... on ProjectV2 {
-          items(first: $numberOfIssues) {
-            nodes {
-              id
-              fieldValues(first: $numberOfFieldValues) {
-                nodes {                
-                  ... on ProjectV2ItemFieldTextValue {
-                    text
-                    field {
-                      ... on ProjectV2FieldCommon {
-                        name
-                      }
-                    }
-                  }
-                  ... on ProjectV2ItemFieldDateValue {
-                    date
-                    field {
-                      ... on ProjectV2FieldCommon {
-                        name
-                      }
-                    }
-                  }
-                  ... on ProjectV2ItemFieldSingleSelectValue {
-                    name
-                    field {
-                      ... on ProjectV2FieldCommon {
-                        name
-                      }
-                    }
-                  }
-                }              
-              }
-              content {              
-                ... on DraftIssue {
-                  title
-                  body
-                }
-                ...on Issue {
-                  title
-                  assignees(first: $numberOfAssignees) {
-                    nodes{
-                      login
-                    }
-                  }
-                  labels(first: $numberOfLabels) {
-                    nodes {
+      ... on ProjectV2 {
+        items(first: 40) {
+          nodes {
+            id
+            fieldValues(last: 1) {
+              nodes {
+                ... on ProjectV2ItemFieldSingleSelectValue {
+                  name
+                  field {
+                    ... on ProjectV2FieldCommon {
                       name
-                      color
                     }
                   }
                 }
-                ...on PullRequest {
-                  title
-                  assignees(first: $numberOfAssignees) {
-                    nodes {
-                      login
-                    }
+              }
+            }
+            content {
+              ... on Issue {
+                id
+                number
+                repository {
+                  name
+                }
+                title
+                body
+                closed
+                bodyText
+                labels(first: 10) {
+                  nodes {
+                    name
+                    color
+                  }
+                }
+                assignees(first: 10) {
+                  nodes {
+                    name
+                    avatarUrl
                   }
                 }
               }
@@ -81,28 +61,29 @@ const GET_PROJECT = gql`
         }
       }
     }
+  }
 `;
 
 const Board = styled.div`
   display: flex;
 `;
 
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export default function GithubProjectBoard({ bearerToken }: GithubProjectBoardProps) {
-  const { data } = useQuery(GET_PROJECT, {
-    variables: {
-      numberOfIssues: 50,
-      numberOfFieldValues: 30,
-      numberOfAssignees: 20,
-      numberOfLabels: 10,
-    },
-  });
+  const { data } = useQuery(GET_PROJECT_COLUMNS);
   console.log(data);
 
   return (
     <div>
       <Authentication bearerToken={bearerToken} />
       <Board>
-        Board
+        <Column>
+          Columns
+        </Column>
       </Board>
     </div>
   );

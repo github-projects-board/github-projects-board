@@ -12,7 +12,6 @@ const Container = styled.div`
   background-color: rgb(1, 4, 9);
   width: 350px;
   height: 100%;
-  border-radius: 6px;
 `;
 
 const Header = styled.div`
@@ -23,8 +22,6 @@ const Header = styled.div`
 const Title = styled.div`
   font-size: 1.2em;
   font-weight: bold;
-  padding-left: 0.2em;
-  padding-right: 0.2em;
   border: 2px solid transparent;
   border-radius: 8px;
   color: rgb(201, 209, 217);
@@ -50,7 +47,9 @@ const ScrollArea = styled.div`
   flex-direction: column;
   gap: 7px;
   overflow-y: scroll;
+  overscroll-behavior-y: contain;
   height: 100%;
+  padding: 0px 12px;
 `;
 
 export default function Column({

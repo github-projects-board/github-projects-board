@@ -14,6 +14,7 @@ const Label = styled.div`
   line-height: 1;
   white-space: nowrap;
   padding: 0px 7px;
+  background-color: ${props => props.color + '50'};
   color: ${props => props.color};
 `;
 

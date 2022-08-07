@@ -76,7 +76,7 @@ const Column = styled.div`
 export default function GithubProjectBoard({ bearerToken }: GithubProjectBoardProps) {
   const { data } = useQuery(GET_PROJECT_COLUMNS);
   const issues = data?.node?.items?.nodes;
-  console.log(issues);
+  console.log('ISSUES:', issues);
 
   return (
     <div>

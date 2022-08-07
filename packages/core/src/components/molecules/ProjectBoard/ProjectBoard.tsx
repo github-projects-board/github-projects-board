@@ -149,6 +149,7 @@ const Board = styled.div`
   gap: 10px;
   width: max-content;
   height: 100vh;
+  padding: 0px 20px;
 `;
 
 export default function ProjectBoard({ bearerToken }: ProjectBoardProps) {

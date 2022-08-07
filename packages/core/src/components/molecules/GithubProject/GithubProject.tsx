@@ -4,21 +4,17 @@ import {
   gql,
 } from '@apollo/client';
 import styled from 'styled-components';
-import Authentication, {
+import
+  Authentication, {
   BearerToken,
 } from '../../atoms/Authentication/Authentication';
+import Columns from '../Columns/Columns';
 
 export interface GithubProjectBoardProps {
   bearerToken: BearerToken;
 }
 
-export interface Option {
-  __typename: string;
-  id: string;
-  name: string;
-}
-
-// PVT_kwHOBXyyXM4ABZY9
+// project node id PVT_kwHOBXyyXM4ABZY9
 const GET_PROJECT_COLUMNS = gql`
   query GetProject {
   user(login: "michaelballos") {
@@ -73,11 +69,6 @@ const Board = styled.div`
   display: flex;
 `;
 
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 export default function GithubProjectBoard({ bearerToken }: GithubProjectBoardProps) {
   const { data } = useQuery(GET_PROJECT_COLUMNS);
   console.log('ISSUES:', data?.user.projectV2.field.options);
@@ -86,12 +77,7 @@ export default function GithubProjectBoard({ bearerToken }: GithubProjectBoardPr
     <div>
       <Authentication bearerToken={bearerToken} />
       <Board>
-        <Column>
-          {data?.user.projectV2.field.options.map((option: Option) => {
-            const { name } = option;
-            return name;
-          })}
-        </Column>
+        {data && (<Columns options={data.user.projectV2.field.options} />)}
       </Board>
     </div>
   );

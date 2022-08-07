@@ -74,8 +74,11 @@ const Column = styled.div`
 `;
 
 export default function GithubProjectBoard({ bearerToken }: GithubProjectBoardProps) {
-  const { data } = useQuery(GET_PROJECT_COLUMNS);
-  console.log(data);
+  const {
+    data,
+  } = useQuery(GET_PROJECT_COLUMNS);
+  const issues = data?.node?.items?.nodes;
+  console.log(issues);
 
   return (
     <div>

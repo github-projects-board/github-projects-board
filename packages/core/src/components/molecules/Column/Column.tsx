@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 interface ColumnProps {
   name: string;
-  children: ReactNode;
+  children: ReactNode | ReactNode[];
 }
 
 const Container = styled.div`
@@ -33,6 +33,18 @@ const Title = styled.div`
   }
 `;
 
+const IssueCount = styled.span`
+  display: inline-block;
+  padding: 2px 5px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  border-radius: 20px;
+  background-color: rgba(110, 118, 129, 0.4);
+  color: rgb(139, 148, 158);
+  margin-left: 8px;
+`;
+
 const ScrollArea = styled.div`
   display: flex;
   flex-direction: column;
@@ -45,11 +57,23 @@ export default function Column({
   name,
   children
 }: ColumnProps) {
+  const [issueCount, setIssueCount] = React.useState(0);
+
+  React.useEffect(() => {
+    if (Array.isArray(children)) {
+      const childrenLength = children.filter((child) => child).length;
+      setIssueCount(childrenLength);
+    }
+  } , [children]);
+
   return (
     <Container>
       <Header>
         <Title>
           {name}
+          <IssueCount>
+            {issueCount}
+          </IssueCount>
         </Title>
       </Header>
       <ScrollArea>

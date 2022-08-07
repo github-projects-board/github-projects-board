@@ -55,6 +55,7 @@ export interface Status {
 
 export interface Content {
   id: string;
+  number: number;
   assignees: Assignee;
   body: string;
   bodyText: string;
@@ -100,6 +101,7 @@ const GET_PROJECT_COLUMNS = gql`
                   content {
                     ... on Issue {
                       id
+                      number
                       repository {
                         name
                       }

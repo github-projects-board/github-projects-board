@@ -36,12 +36,13 @@ export default function IssueCard({ content }: IssueCardProps) {
     title,
     repository,
     labels,
+    number,
   } = content;
 
   return (
     <Card>
       <Repository>
-        {repository ? repository.name : 'Draft'}
+        {repository ? `${repository.name} #${number}` : 'Draft'}
       </Repository>
       <Title>
         {title}

@@ -1,0 +1,13 @@
+node_modules
+
+.eslintrc.js
+
+.eslintrc
+
+.gitignore
+
+.babel.config.js
+
+tsconfig.json
+
+./public/mockServiceWorker.js

@@ -12,47 +12,51 @@ export interface GithubProjectBoardProps {
   bearerToken: BearerToken;
 }
 
+export interface Option {
+  __typename: string;
+  id: string;
+  name: string;
+}
+
 // PVT_kwHOBXyyXM4ABZY9
 const GET_PROJECT_COLUMNS = gql`
-  query {
-    node(id: "PVT_kwHOBXyyXM4ABZY9") {
-      ... on ProjectV2 {
-        items(first: 40) {
-          nodes {
+  query GetProject {
+  user(login: "michaelballos") {
+    projectV2(number: 1) {
+      field(name: "Status") {
+        ... on ProjectV2SingleSelectField {
+          id
+          name
+          options {
             id
-            fieldValues(last: 1) {
+            name
+          }
+          project {
+            items(first: 40) {
               nodes {
-                ... on ProjectV2ItemFieldSingleSelectValue {
-                  name
-                  field {
-                    ... on ProjectV2FieldCommon {
+                content {
+                  ... on Issue {
+                    id
+                    number
+                    repository {
                       name
                     }
-                  }
-                }
-              }
-            }
-            content {
-              ... on Issue {
-                id
-                number
-                repository {
-                  name
-                }
-                title
-                body
-                closed
-                bodyText
-                labels(first: 10) {
-                  nodes {
-                    name
-                    color
-                  }
-                }
-                assignees(first: 10) {
-                  nodes {
-                    name
-                    avatarUrl
+                    title
+                    body
+                    closed
+                    bodyText
+                    labels(first: 10) {
+                      nodes {
+                        name
+                        color
+                      }
+                    }
+                    assignees(first: 10) {
+                      nodes {
+                        name
+                        avatarUrl
+                      }
+                    }
                   }
                 }
               }
@@ -62,6 +66,7 @@ const GET_PROJECT_COLUMNS = gql`
       }
     }
   }
+}
 `;
 
 const Board = styled.div`
@@ -75,15 +80,17 @@ const Column = styled.div`
 
 export default function GithubProjectBoard({ bearerToken }: GithubProjectBoardProps) {
   const { data } = useQuery(GET_PROJECT_COLUMNS);
-  const issues = data?.node?.items?.nodes;
-  console.log('ISSUES:', issues);
+  console.log('ISSUES:', data?.user.projectV2.field.options);
 
   return (
     <div>
       <Authentication bearerToken={bearerToken} />
       <Board>
         <Column>
-          Columns
+          {data?.user.projectV2.field.options.map((option: Option) => {
+            const { name } = option;
+            return name;
+          })}
         </Column>
       </Board>
     </div>

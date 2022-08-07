@@ -99,6 +99,16 @@ const GET_PROJECT_COLUMNS = gql`
                     }
                   }
                   content {
+                    ... on DraftIssue {
+                      id
+                      body
+                      title
+                      assignees(first: 10) {
+                        nodes {
+                          name
+                        }
+                      }
+                    }
                     ... on Issue {
                       id
                       number

@@ -7,19 +7,18 @@ interface IssueLabelProps {
 }
 
 const Label = styled.div`
-  border-radius: 100px;
   padding: 2px;
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
   white-space: nowrap;
-  padding: 0px 7px;
+  padding: 2px 7px;
   background-color: ${props => props.color + '50'};
   color: ${props => props.color};
 `;
 
 const LabelBorder = styled.div`
-  border: 2px solid ${props => props.color};
+  border: 1px solid ${props => props.color};
   border-radius: 999px;
 `;
 

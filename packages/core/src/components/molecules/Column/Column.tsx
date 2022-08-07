@@ -12,6 +12,7 @@ const Container = styled.div`
   background-color: rgb(1, 4, 9);
   width: 350px;
   height: 100%;
+  border: 0.5px solid #383737;
 `;
 
 const Header = styled.div`

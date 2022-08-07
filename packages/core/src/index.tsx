@@ -6,6 +6,7 @@ import {
   InMemoryCache,
 } from '@apollo/client';
 import App from './App';
+import './styles/global.css';
 
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',

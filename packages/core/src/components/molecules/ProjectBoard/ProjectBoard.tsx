@@ -9,15 +9,69 @@ import
   BearerToken,
 } from '../../atoms/Authentication/Authentication';
 import Column from '../Column/Column';
+import IssueCard from '../IssueCard/IssueCard';
 
 export interface Option {
-  __typename: string;
   id: string;
   name: string;
+  __typename: string;
 }
 
 export interface ProjectBoardProps {
   bearerToken: BearerToken;
+}
+
+export interface User {
+  avatarUrl: string;
+  name: string;
+  __typename: 'User';
+}
+
+export interface Assignee {
+  nodes: User[];
+  __typename: 'UserConnection';
+}
+
+export interface Label {
+  name: string;
+  color: string;
+  __typename: 'Label';
+}
+
+export interface Labels {
+  nodes: Label[];
+  __typename: 'LabelConnection';
+}
+
+export interface Repository {
+  name: string;
+  __typename: 'Repository';
+}
+
+export interface Status {
+  name: string;
+  __typename: 'ProjectV2ItemFieldSingleSelectValue';
+}
+
+export interface Content {
+  id: string;
+  assignees: Assignee;
+  body: string;
+  bodyText: string;
+  closed: boolean;
+  labels: Labels;
+  repository: Repository;
+  title: string;
+  __typename: 'Issue';
+}
+
+export interface Issue {
+  content: Content;
+  fieldValues: {
+    nodes: Status[];
+    __typename: 'ProjectV2ItemFieldValueConnection';
+  };
+  __typename: 'ProjectV2Item';
 }
 
 // project node id PVT_kwHOBXyyXM4ABZY9
@@ -46,7 +100,6 @@ const GET_PROJECT_COLUMNS = gql`
                   content {
                     ... on Issue {
                       id
-                      number
                       repository {
                         name
                       }
@@ -83,12 +136,14 @@ const Board = styled.div`
   display: flex;
   gap: 10px;
   width: max-content;
+  height: 40em;
 `;
-
 
 export default function ProjectBoard({ bearerToken }: ProjectBoardProps) {
   const { data } = useQuery(GET_PROJECT_COLUMNS);
   const options  = data?.user.projectV2.field.options;
+  const issues = data?.user.projectV2.field.project.items.nodes;
+  console.log('ISSUES:', issues);
 
   return (
     <div>
@@ -100,7 +155,20 @@ export default function ProjectBoard({ bearerToken }: ProjectBoardProps) {
             <Column
               key={name}
               name={name}
-            />
+            >
+              {issues.map((issue: Issue) => {
+                const {
+                  content,
+                  fieldValues,
+                } = issue;
+                return fieldValues.nodes[0].name === name && (
+                  <IssueCard
+                    key={content.id}
+                    content={content}
+                  />
+                );
+              })}
+            </Column>
           );
         })}
       </Board>
